@@ -86,7 +86,7 @@ uint8_t getEncodedValue(int value)
 {
   if(value==TRUE) return TRUEVAL;
   if(value==FALSE) return FALSEVAL;
-   OFFVAL;
+  return OFFVAL;
 }
 
 void setValue(char value)

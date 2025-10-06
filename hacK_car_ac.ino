@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <EEPROM.h>
 
@@ -95,7 +96,7 @@ void setValue(char value)
   int ival = interpretVal(EEPROM.read(0));
   if (ival)
   {
-    // When the eeprom is full, erase it
+    // When the eeprom is full, erase it first
     for (int j = 0 ; j < EEPROM.length() ; j++) {
       EEPROM.write(j, 0xff);
     }
@@ -105,15 +106,21 @@ void setValue(char value)
     ival = (i == EEPROM.length()) ? TRUE : interpretVal(EEPROM.read(i));
     if (ival)
     {
+      // We have found the first non-empty location.
       do { 
         i--;
+        // Step back one, and use that location for the new value
         EEPROM.write(i, encodedValue);
+        // If the eeprom write fails, skip over, and step back one more step.
       } while ((EEPROM.read(i) != encodedValue) && (i>=0));
       break;
     }
   }
   if (i<0)
   {
+    // We have underflown. This can happen if writes fail,
+    // down to the first location.
+    // Last ditch effort to save some functionality:
     for (int j = 0 ; j < EEPROM.length() ; j++) {
       EEPROM.write(j, encodedValue);
     }

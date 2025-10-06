@@ -11,6 +11,9 @@ This project probably functions on some other cars as well as long
 as they have the following control unit:
 ![image of the front side of the car AC control unit](pictures/20200517_062006_front_side.jpg)
 
+The label has the following number, which is probably a part number: `8200531471`
+Also the following identifiers appear: `VE 69530006` , and `VTH N103904R`
+
 # BOM
 - 1 Pro Micro
 - 6 wires ( 3 going to observe led states, 1 going to observe and simulate press, 2 for ground and power)

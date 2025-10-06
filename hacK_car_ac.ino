@@ -110,7 +110,9 @@ void setValue(char value)
       do { 
         i--;
         // Step back one, and use that location for the new value
-        EEPROM.write(i, encodedValue);
+        if (i >= 0) {
+          EEPROM.write(i, encodedValue);
+        }
         // If the eeprom write fails, skip over, and step back one more step.
       } while ((EEPROM.read(i) != encodedValue) && (i>=0));
       break;
